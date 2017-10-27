@@ -8,4 +8,4 @@ Export device variable to cloud firebase realtime database
 
 # TeleInfoGateway
 Inspire by a vera mqqt plugin, get French Electricity Meter information (Linky teleinfo) and put them into vera variables
-[Instructions](../teleinfogate/README)
+[Instructions](./teleinfogate/README)
