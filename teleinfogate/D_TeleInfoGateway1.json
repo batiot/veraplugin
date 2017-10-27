@@ -1,0 +1,205 @@
+{
+    "default_icon":"http://www.cyberacteurs.org/cyberactions/images/vignettes/linky-1-w-500_62.jpg",
+    "state_icons": [
+        {
+            "img": "meter_off.png",
+            "conditions": [
+                {
+                    "service": "urn:erdf-fr:serviceId:TeleInfoGateway1",
+                    "variable": "LinkStatus",
+                    "operator": "==",
+                    "value": 0,
+                    "subcategory_num": 0
+                }
+            ]
+        },
+        {
+            "img": "http://www.cyberacteurs.org/cyberactions/images/vignettes/linky-1-w-500_62.jpg",
+            "conditions": [
+                {
+                    "service": "urn:erdf-fr:serviceId:TeleInfoGateway1",
+                    "variable": "LinkStatus",
+                    "operator": "==",
+                    "value": 1,
+                    "subcategory_num": 0
+                }
+            ]
+        }
+    ],
+    "doc_url":{
+
+    },
+    "Tabs": [
+     {
+            "Label": {
+                "lang_tag": "tabname_control",
+                "text": "Information"
+            },
+            "Position": "0",
+            "TabType": "flash",
+            "SceneGroup": [
+                {
+                    "id": "1",
+                    "top": "1.5",
+                    "left": "0",
+                    "x": "2",
+                    "y": "1"
+                }
+            ],
+            "ControlGroup": [
+                {
+                    "id": "1",
+                    "scenegroup": "1",
+                    "type": "info"
+                }
+            ],
+            "Control": [
+               {
+                    "ControlGroup": "1",
+                    "ControlType": "label",
+                    "top": "0",
+                    "left": "0",
+                    "Label": {
+                        "lang_tag": "puissance",
+                        "text": "Puissance apparente:"
+                    },
+                    "Display": {
+                        "Top": 280,
+                        "Left": 465,
+                        "Width": 60,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlGroup": "1",
+	            "text_align": "left",
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:erdf-fr:serviceId:TeleInfoGateway1",
+                        "Variable": "PAPP",
+                        "Value": "1",
+                        "Top": 280,
+                        "Left": 525,
+                        "Width": 75,
+                        "Height": 20
+                    }
+                }]
+	},
+        {
+            "Label": {
+                "lang_tag": "advanced",
+                "text": "Advanced" 
+            },
+            "Position": "2",
+            "TabType": "javascript",
+            "ScriptName": "shared.js",
+            "Function": "advanced_device" 
+        } 
+    ],
+    "eventList2": [
+        {
+            "id": 1,
+            "label": {
+                "lang_tag": "tarif_change",
+                "text": "Changement tarif"
+            },
+            "serviceId": "urn:erdf-fr:serviceId:TeleInfoGateway1",
+            "norepeat": "1",
+            "argumentList": [
+                {
+                    "id": 1,
+                    "dataType": "string",
+                    "allowedValueList": [
+                        {
+                            "value": "TH..",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_th",
+                                "text": "_DEVICE_NAME_: Toutes les heures"
+                            }
+                        },
+                        {
+                            "value": "HC..",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hc",
+                                "text": "_DEVICE_NAME_: Heures creuses"
+                            }
+                        },
+                        {
+                            "value": "HCJB",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hcjb",
+                                "text": "_DEVICE_NAME_: Heures creuses Bleu"
+                            }
+                        },
+			{
+                            "value": "HPLB.",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hpjb",
+                                "text": "_DEVICE_NAME_: Heures pleines Bleu "
+                            }
+                        },
+						{
+                            "value": "HCJW",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hcjw",
+                                "text": "_DEVICE_NAME_: Heures creuses Blanc"
+                            }
+                        },
+						{
+                            "value": "HPJW",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hpjw",
+                                "text": "_DEVICE_NAME_: Heures pleines Blanc"
+                            }
+                        },
+			{
+                            "value": "HCJR",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hcjr",
+                                "text": "_DEVICE_NAME_: Heures creuses Rouge"
+                            }
+                        },
+			{
+                            "value": "HPJR",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hpjr",
+                                "text": "_DEVICE_NAME_: Heures pleines Rouge "
+                            }
+                        },
+						
+					   {
+                            "value": "HP..",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hp",
+                                "text": "_DEVICE_NAME_: Heures pleines"
+                            }
+                        },
+                        {
+                            "value": "HN..",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_hn",
+                                "text": "_DEVICE_NAME_: Heures normales"
+                            }
+                        },
+                        {
+                            "value": "PM..",
+                            "HumanFriendlyText": {
+                                "lang_tag": "hft_tedf_event_period_pm",
+                                "text": "_DEVICE_NAME_: Heures de pointe mobile"
+                            }
+                        }
+                    ],
+                    "name": "PTEC",
+                    "comparisson": "=",
+                    "prefix": {
+                        "lang_tag": "status",
+                        "text": "Status"
+                    },
+                    "suffix": {}
+                }
+            ]
+        }
+    ],
+    "DeviceType": "urn:schemas-erdf-fr:device:TeleInfoGateway:1",
+    "device_type": "urn:schemas-erdf-fr:device:TeleInfoGateway:1" 
+}

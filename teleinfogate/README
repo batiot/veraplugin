@@ -1,0 +1,22 @@
+
+#1 Plugins Install
+Uplaod Plugins files
+reload lupp: http://veraip:3480/data_request?id=reload
+Create Device
+	Description:TeleinfoGateway
+	Upnp Device Filename:D_TeleInfoGateway1.xml
+	Upnp Implementation Filename:I_TeleInfoGateway1.xml
+	Device type:urn:schemas-erdf-fr:device:TeleInfoGateway:1
+
+#2 Hardware + serial port config
+plug you usb to teleinfo adapter (FT232 based) ex: http://hallard.me/demystifier-la-teleinfo/
+reload lupp: http://veraip:3480/data_request?id=reload
+Config the second serial port: Apps>Develop apps>Serial Port configuration
+ 	Baud: 1200
+	Data bits: 7
+	Parity: even (paire)
+	Stop bits: 1
+	Used By device: TeleinfoGateway
+reload lupp: http://veraip:3480/data_request?id=reload
+
+#3 

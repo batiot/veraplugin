@@ -1,0 +1,50 @@
+{
+  "erdf_400" : {
+    "label" : "TéleInfo",
+    "typeCode" : "erdf"
+  },
+  "humi_000" : {
+    "label" : "Humidité salon",
+    "typeCode" : "humi"
+  },
+  "humi_100" : {
+    "label" : "Humidité Parent",
+    "typeCode" : "humi"
+  },
+  "humi_101" : {
+    "label" : "Humidité Grand",
+    "typeCode" : "humi"
+  },
+  "humi_102" : {
+    "label" : "Humidité Emie",
+    "typeCode" : "humi"
+  },
+  "humi_300" : {
+    "label" : "Humidité Jardin",
+    "typeCode" : "humi"
+  },
+  "rain_300" : {
+    "label" : "Pluie",
+    "typeCode" : "rain"
+  },
+  "temp_000" : {
+    "label" : "Température Salon",
+    "typeCode" : "temp"
+  },
+  "temp_100" : {
+    "label" : "Température Parent",
+    "typeCode" : "temp"
+  },
+  "temp_101" : {
+    "label" : "Température Grand",
+    "typeCode" : "temp"
+  },
+  "temp_102" : {
+    "label" : "Température Emie",
+    "typeCode" : "temp"
+  },
+  "temp_300" : {
+    "label" : "Température Jardin",
+    "typeCode" : "temp"
+  }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <serviceStateTable>
+      <stateVariable sendEvents="no">
+          <name>LinkStatus</name>
+          <dataType>string</dataType>
+      </stateVariable>
+      <stateVariable sendEvents="no">
+          <name>PTEC</name>
+          <dataType>string</dataType>
+      </stateVariable>
+      <stateVariable sendEvents="no">
+          <name>PAPP</name>
+          <dataType>string</dataType>
+      </stateVariable>
+  </serviceStateTable>
+</scpd>

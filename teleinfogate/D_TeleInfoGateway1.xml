@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <device>
+    <deviceType>urn:schemas-erdf-fr:device:TeleInfoGateway:1</deviceType>
+    <staticJson>D_TeleInfoGateway1.json</staticJson>
+    <friendlyName>Erdf TeleInfo Gateway</friendlyName>
+    <protocol>cr</protocol>
+    <serviceList>
+      <service>
+        <serviceType>urn:schemas-erdf-fr:service:TeleInfoGateway:1</serviceType>
+        <serviceId>urn:erdf-fr:serviceId:TeleInfoGateway1</serviceId>
+        <SCPDURL>S_TeleInfoGateway1.xml</SCPDURL>
+      </service>
+    </serviceList>
+    <implementationList>
+      <implementationFile>I_TeleInfoGateway1.xml</implementationFile>
+    </implementationList>
+  </device>
+</root>

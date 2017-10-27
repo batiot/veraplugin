@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation>
+    <functions>
+        local p
+    	  local u
+        local m
+
+        function firebasestartup(lul_device)
+            luup.log("Firebase plugin: loading library L_Firebase1 ...")
+            if (package.path:find ("/etc/cmh-ludl/?.lua;/etc/cmh-lu/?.lua", 1, true) == nil) then
+                package.path = package.path .. ";/etc/cmh-ludl/?.lua;/etc/cmh-lu/?.lua"
+            end
+            package.loaded.L_Firebase1 = nil
+            p = require("L_Firebase1")
+            if (package.loaded.L_Firebase1 == nil)
+            then
+                luup.log("Firebase1 plugin: plugin is not installed correctly. Library L_Firebase1 cannot be loaded.", 1)
+                luup.task("Plugin not correctly installed", 2, "Firebase plugin", -1)
+                return false
+            end
+            luup.log("Firebase plugin: library L_Firebase1 loaded")
+            return p.initWatch(lul_device)
+        end
+    </functions>
+    <startup>firebasestartup</startup>
+</implementation>

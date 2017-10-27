@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<implementation>
+<functions>
+	local deviceId = -1
+	local linkStatus = -1
+	local SERVICE_SID = "urn:erdf-fr:serviceId:TeleInfoGateway1"
+
+	function startup(lul_device)
+		deviceId = tonumber(lul_device)
+		luup.variable_set(SERVICE_SID, "LinkStatus",1, deviceId)
+		linkStatus= luup.variable_get(SERVICE_SID, "LinkStatus",deviceId)
+	   	luup.log("Init device:" .. tostring(lul_device) .. " LinkStatus:" .. tostring(linkStatus))
+	end
+
+	function updateVarIfDifferent(variable, value)
+                local v = luup.variable_get(SERVICE_SID, variable, deviceId)
+	        if (v == nil) then
+	        	luup.variable_set(SERVICE_SID, variable, value, deviceId)
+	        else 
+			if (v ~= value) then
+	                	luup.variable_set(SERVICE_SID, variable, value, deviceId)
+			end
+                end
+	end
+
+	function updateVarIfThousandDifferent(variable, value)
+                local v = luup.variable_get(SERVICE_SID, variable, deviceId)
+		local numberValue = tonumber(value);
+		local numberValueCeil = math.ceil(numberValue/1000);
+	        if (v == nil) then
+	        	luup.variable_set(SERVICE_SID, variable, numberValueCeil, deviceId)
+	        else 
+			if (tostring(v) ~= tostring(numberValueCeil)) then
+	                	luup.variable_set(SERVICE_SID, variable, numberValueCeil, deviceId)
+			end
+                end
+	end
+
+	function checkIncoming(lul_data)
+		-- Update link status
+		if (not linkStatus == 1) then
+			linkStatus = 1
+			luup.variable_set(SERVICE_SID, "LinkStatus",linkStatus, deviceId)
+		end
+  
+		local optcode = ""
+		local param = ""
+		local checksum = 0
+		local sum = 0
+		local next = 0
+		
+		for c in lul_data:gmatch"." do
+			d = c:byte()
+			-- if (d &gt; 127) then d = d - 128 end -- comment this line to disable the 8N1 to 7D1 transformation
+	
+	                if (d == 32 and next ~= 2) then -- space
+	                	next = next + 1
+	                else 
+				if (next == 0) then
+					optcode = optcode .. string.char(d)
+					sum = sum + d
+				end
+				if (next == 1) then
+					param = param .. string.char(d)
+					sum = sum + d
+				end
+				if (next == 2) then
+					checksum = d
+					next = next + 1
+				end
+			end
+		end
+
+		-- compute checksum
+		sum = sum + 32
+		sum = sum % 256
+		if (sum &gt; 127) then sum = sum - 128 end
+		if (sum &gt; 63) then sum = sum - 64 end
+		sum = sum + 32
+	
+		if (sum == checksum) then
+			return optcode, param
+		else
+			--luup.log("TEDF: Checksum error : [" .. lul_data .. "] ",2)
+		end
+	end
+
+	function processData(optcode, param)
+		--luup.log("TEDF: Checksum ok : \"" .. optcode .. "\" : \"" .. param .. "\"")
+		--remove useless 000 in front of
+		-- remove leading 0 from string begin.
+		local cleanParam = string.gsub(param,"^0*", "")
+
+		--To frequent change for index
+		if string.find(optcode, "^HC") then
+		  updateVarIfThousandDifferent(optcode,cleanParam)
+		else
+		  updateVarIfDifferent(optcode,cleanParam)
+		end
+	end
+
+	function testAction(lul_device,lul_settings)
+		luup.log('device: ' .. tostring(lul_device) .. ' value: ')
+		return true -- function success
+	end
+
+</functions>
+<startup>startup</startup>
+<incoming>
+<lua>
+	--lul_device is a number that is the device id
+	--lul_data is a binary string with the data received
+	--return values: none 
+	if (luup.is_ready(lul_device) == false) then
+	       return
+	end
+	if string.len(lul_data) > 2 then
+		local optcode, param = checkIncoming(tostring(lul_data));
+		processData(optcode,param)
+	end
+</lua>
+</incoming>
+<actionList>
+	<action>
+		<serviceId>urn:erdf-fr:serviceId:TeleInfoGateway1</serviceId>
+	    	<name>TestAction</name>
+		<run>
+			return testAction(lul_device, lul_settings)
+		</run>
+	</action>
+</actionList>
+</implementation>

@@ -1,0 +1,27 @@
+{
+  "erdf" : {
+    "type" : "urn:erdf-fr:serviceId:TeleInfoGateway1",
+    "urn" : "urn:schemas-erdf-fr:device:TeleInfoGateway:1",
+    "variables" : [ "HCHP", "HCHC" ]
+  },
+  "humi" : {
+    "type" : "urn:micasaverde-com:serviceId:HumiditySensor1",
+    "urn" : "urn:schemas-micasaverde-com:device:HumiditySensor:1",
+    "variables" : [ "CurrentLevel" ]
+  },
+  "rain" : {
+    "type" : "urn:upnp-org:serviceId:RainSensor1",
+    "urn" : "urn:schemas-micasaverde-com:device:RainSensor:1",
+    "variables" : [ "CurrentTRain" ]
+  },
+  "swit" : {
+    "type" : "urn:upnp-org:serviceId:SwitchPower1",
+    "urn" : "FAKE urn:schemas-upnp-org:device:BinaryLight:1",
+    "variables" : [ "Status" ]
+  },
+  "temp" : {
+    "type" : "urn:upnp-org:serviceId:TemperatureSensor1",
+    "urn" : "urn:schemas-micasaverde-com:device:TemperatureSensor:1",
+    "variables" : [ "CurrentTemperature" ]
+  }
+}
